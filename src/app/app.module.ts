@@ -9,6 +9,13 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireModule } from 'angularfire2';
+  var config = {
+    apiKey: "AIzaSyCMuM1Toy1upqRY1czF0YpkhxrAo2fzR4Q",
+    authDomain: "pi-grit.firebaseapp.com",
+    databaseURL: "https://pi-grit.firebaseio.com",
+    storageBucket: "pi-grit.appspot.com",
+    messagingSenderId: "1091509710648"
+  };
 @NgModule({
   declarations: [
     MyApp,
@@ -18,7 +25,8 @@ import { AngularFireModule } from 'angularfire2';
     TabsPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(config)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
