@@ -2,14 +2,57 @@ import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
 
+import { AngularFire, AuthMethods, AuthProviders ,FirebaseListObservable,FirebaseObjectObservable} from 'angularfire2';
+import {Observable} from 'rxjs/Observable';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-
-  constructor(public navCtrl: NavController) {
-
+  rpi;
+   private Rooms:FirebaseListObservable<any[]>;
+   private mail:FirebaseObjectObservable<any[]>;
+  constructor(public navCtrl: NavController,private af:AngularFire) {
+this.initializeItems();
+// this.Rooms=af.database.object('/Rooms');
+// this.Rooms.push({"a":"b"}).then((room) => { console.log(room.key); });
+// this.mail=af.database.object('/name').set({ name: 'Test' });;
+// .set({ name: 'Test' });
+// this.mail.push({});
+// this.mail.push({name:'new item'}).then((room) => { console.log(room.key); });;
+// af.database.object().put()
   }
+
+   initializeItems() {
+    this.rpi = [
+      'Aamsterdam',
+      'Bogota',
+      'Buenos Aires',
+      'Cairo',
+      'Dhaka',
+      'Edinburgh',
+      'Geneva',
+'Genoa'
+    ];
+}
+  logout() { 
+    this.af.auth.logout(); 
+    console.log("Log out");
+  }
+
+ getItems(ev) {
+    // Reset rpi back to all of the items
+    this.initializeItems();
+
+    // set val to the value of the ev target
+    var val = ev.target.value;
+
+    // if the value is an empty string don't filter the rpi
+    if (val && val.trim() != '') {
+      this.rpi = this.rpi.filter((item) => {
+        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+}
 
 }

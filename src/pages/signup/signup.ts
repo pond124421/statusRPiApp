@@ -17,8 +17,11 @@ export class SignupPage {
     password: '',
     passwordRetyped: ''
   };
+  mail="grit@gmail"
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,private af: AngularFire) {
     this.signupData.email = this.navParams.get('email');
+    // const mail=af.database.object();
+    // mail.push('new item');
   }
 
   ionViewDidLoad() {
@@ -41,7 +44,13 @@ this.af.auth.createUser({
      })
     .then(auth => {
       // Could do something with the Auth-Response
-      console.log(auth);
+      // console.log(auth);
+      // console.log("email : "+ this.signupData.email);
+      const covernMail=this.signupData.email.replace(/[.]/g,"-").toString();
+ 
+      console.log("email : "+covernMail)
+      this.af.database.object('/'+  covernMail).set({temp:"emtry"});
+      //  this.af.database.object('/'+this.m ).set({});
     })
     .catch(err => {
       // Handle error

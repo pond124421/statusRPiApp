@@ -11,7 +11,7 @@ import { SignupPage } from '../pages/signup/signup';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireModule } from 'angularfire2';
-  var config = {
+  export const config = {
     apiKey: "AIzaSyCMuM1Toy1upqRY1czF0YpkhxrAo2fzR4Q",
     authDomain: "pi-grit.firebaseapp.com",
     databaseURL: "https://pi-grit.firebaseio.com",

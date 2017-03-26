@@ -25,6 +25,7 @@ export class LoginPage {
     })
     .then(auth => {
       // Do custom things with auth
+      console.log(this.loginData.email+" "+this.loginData.password);
     })
     .catch(err => {
       // Handle error
@@ -35,7 +36,7 @@ export class LoginPage {
       toast.present();
     });
   }
- 
+
   signup() {
     this.navCtrl.push(SignupPage, { email: this.loginData.email });
   }
