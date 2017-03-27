@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 import { SignupPage } from '../signup/signup';
 import { AngularFire, AuthMethods, AuthProviders } from 'angularfire2';
- 
+
+import { HomePage } from '../home/home';
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -26,6 +27,7 @@ export class LoginPage {
     .then(auth => {
       // Do custom things with auth
       console.log(this.loginData.email+" "+this.loginData.password);
+    this.navCtrl.push(HomePage, { uid: auth.auth.uid });
     })
     .catch(err => {
       // Handle error

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { NavController,NavParams } from 'ionic-angular';
 
 import { AngularFire, AuthMethods, AuthProviders ,FirebaseListObservable,FirebaseObjectObservable} from 'angularfire2';
 import {Observable} from 'rxjs/Observable';
@@ -10,10 +10,16 @@ import {Observable} from 'rxjs/Observable';
 })
 export class HomePage {
   rpi;
-   private Rooms:FirebaseListObservable<any[]>;
-   private mail:FirebaseObjectObservable<any[]>;
-  constructor(public navCtrl: NavController,private af:AngularFire) {
+   private Rooms:FirebaseObjectObservable<any>;
+  //  private mail:FirebaseObjectObservable<any[]>;
+  private uid:String="SMbf7EjRFZRCIxzssTDUT4UnR83";
+  constructor(public navCtrl: NavController,private af:AngularFire,public navParams:NavParams) {
 this.initializeItems();
+// this.uid= this.navParams.get('uid');
+this.Rooms=af.database.object('/users/'+this.uid+'/status');
+console.log("uid home: "+this.uid)
+console.log(JSON.stringify(this.Rooms));
+// console.log(this.Rooms)
 // this.Rooms=af.database.object('/Rooms');
 // this.Rooms.push({"a":"b"}).then((room) => { console.log(room.key); });
 // this.mail=af.database.object('/name').set({ name: 'Test' });;

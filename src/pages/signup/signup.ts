@@ -44,13 +44,16 @@ this.af.auth.createUser({
      })
     .then(auth => {
       // Could do something with the Auth-Response
-      // console.log(auth);
-      // console.log("email : "+ this.signupData.email);
+      // console.log(auth
+
       const covernMail=this.signupData.email.replace(/[.]/g,"-").toString();
- 
       console.log("email : "+covernMail)
-      this.af.database.object('/'+  covernMail).set({temp:"emtry"});
-      //  this.af.database.object('/'+this.m ).set({});
+      // this.af.database.object('/'+  covernMail).set({temp:"emtry"});
+      this.af.database.object('/users'+  auth.auth.uid).set({
+        email:this.signupData.email,
+        pass: this.signupData.password,
+        status:"-"
+        });
     })
     .catch(err => {
       // Handle error
