@@ -12,9 +12,9 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding style="background-color:skyblue ; ">
     <ion-list>
-        <ion-item>
+        <ion-item style="background-color:lightblue ; ">
             <ion-label floating>E-Mail</ion-label>
             <ion-input type="email" [(ngModel)]="loginData.email"></ion-input>
         </ion-item>
@@ -25,4 +25,9 @@
     </ion-list>
     <button full ion-button (click)="login()">Login</button>
     <a href="#" (click)="signup()">Signup for an Account</a>
+
+    <button full secondary ion-button (click)="offline()">Offine</button>
+    <!--<div style="height: 40px;" class="spacer"></div>
+    <button ng-click="loginEmail(loginForm,user)" class=" button button-assertive  button-block  icon-left ion-ios-email-outline " id="signup-button3">LOGIN WITH EMAIL</button>
+    <button ng-click="loginFb('facebook')" class=" button button-positive  button-block icon-left ion-social-facebook " id="signup-button4">LOGIN WITH FACEBOOK</button>-->
 </ion-content>

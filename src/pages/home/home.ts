@@ -14,11 +14,23 @@ export class HomePage {
   //  private mail:FirebaseObjectObservable<any[]>;
   private uid:String="SMbf7EjRFZRCIxzssTDUT4UnR83";
   constructor(public navCtrl: NavController,private af:AngularFire,public navParams:NavParams) {
-this.initializeItems();
+
 // this.uid= this.navParams.get('uid');
-this.Rooms=af.database.object('/users/'+this.uid+'/status');
-console.log("uid home: "+this.uid)
-console.log(JSON.stringify(this.Rooms));
+    this.Rooms = af.database.object('users/CSMbf7EjRFZRCIxzssTDUT4UnR83/status');
+  //  this.Rooms.subscribe(
+  //       console.log
+       
+  //     );    
+      this.Rooms.subscribe(item => {
+        // console.log(item);
+        this.rpi=Object.keys(item)
+    console.log(Object.keys(item));
+        // return item;
+      });  
+// console.log("uid home: "+this.uid)
+// console.log("dd"+JSON.stringify(this.Rooms));
+console.log("Before log obj key")    
+    // console.log(Object.keys(this.Rooms));
 // console.log(this.Rooms)
 // this.Rooms=af.database.object('/Rooms');
 // this.Rooms.push({"a":"b"}).then((room) => { console.log(room.key); });
@@ -29,29 +41,20 @@ console.log(JSON.stringify(this.Rooms));
 // af.database.object().put()
   }
 
-   initializeItems() {
-    this.rpi = [
-      'Aamsterdam',
-      'Bogota',
-      'Buenos Aires',
-      'Cairo',
-      'Dhaka',
-      'Edinburgh',
-      'Geneva',
-'Genoa'
-    ];
-}
+
   logout() { 
     this.af.auth.logout(); 
     console.log("Log out");
   }
-
- getItems(ev) {
+  monitor(rpi) {
+  console.log("home clicked : "+rpi)
+}
+ getItems() {
     // Reset rpi back to all of the items
-    this.initializeItems();
+    // this.initializeItems();
 
     // set val to the value of the ev target
-    var val = ev.target.value;
+    // var val = ev.target.value;
 
     // if the value is an empty string don't filter the rpi
     if (val && val.trim() != '') {

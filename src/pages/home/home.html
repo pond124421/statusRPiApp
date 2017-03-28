@@ -11,15 +11,22 @@
 
         <ion-title>Home</ion-title>
 
-        <!--<ion-searchbar [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"> </ion-searchbar>-->
+        <ion-searchbar [(ngModel)]="getItems" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"> </ion-searchbar>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
     <ion-list>
-        <ion-item *ngFor="let item of rpi">
+        <!--<button (click)="monitor(item)" *ngFor="let item of rpi">
             {{ item }}
+         </button>-->
+
+        <ion-item (click)="monitor(item)" *ngFor="let item of rpi"> <button>
+            {{ item }}
+            </button>
         </ion-item>
+
+
     </ion-list>
 
 </ion-content>
