@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 import { NavController,NavParams } from 'ionic-angular';
 
+import { AboutPage } from '../about/about';
+import { MonitorPage } from '../monitor/monitor'
 import { AngularFire, AuthMethods, AuthProviders ,FirebaseListObservable,FirebaseObjectObservable} from 'angularfire2';
 import {Observable} from 'rxjs/Observable';
 @Component({
@@ -10,13 +12,14 @@ import {Observable} from 'rxjs/Observable';
 })
 export class HomePage {
   rpi;
+  aboutPage = AboutPage;
    private Rooms:FirebaseObjectObservable<any>;
   //  private mail:FirebaseObjectObservable<any[]>;
-  private uid:String="SMbf7EjRFZRCIxzssTDUT4UnR83";
+  private uid:String="CSMbf7EjRFZRCIxzssTDUT4UnR83";
   constructor(public navCtrl: NavController,private af:AngularFire,public navParams:NavParams) {
 
 // this.uid= this.navParams.get('uid');
-    this.Rooms = af.database.object('users/CSMbf7EjRFZRCIxzssTDUT4UnR83/status');
+    this.Rooms = af.database.object('users/'+this.uid+'/status');
   //  this.Rooms.subscribe(
   //       console.log
        
@@ -46,8 +49,9 @@ console.log("Before log obj key")
     this.af.auth.logout(); 
     console.log("Log out");
   }
-  monitor(rpi) {
-  console.log("home clicked : "+rpi)
+  monitor(mac) {
+  console.log("home clicked : "+mac)
+    this.navCtrl.push(MonitorPage, { path:'users/'+this.uid+'/status/'+mac});
 }
  getItems() {
     // Reset rpi back to all of the items
@@ -57,11 +61,11 @@ console.log("Before log obj key")
     // var val = ev.target.value;
 
     // if the value is an empty string don't filter the rpi
-    if (val && val.trim() != '') {
-      this.rpi = this.rpi.filter((item) => {
-        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
-    }
+    // if (val && val.trim() != '') {
+    //   this.rpi = this.rpi.filter((item) => {
+    //     return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+    //   })
+    // }
 }
 
 }
