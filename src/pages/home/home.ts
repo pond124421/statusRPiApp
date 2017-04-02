@@ -12,6 +12,7 @@ import {Observable} from 'rxjs/Observable';
 })
 export class HomePage {
   rpi;
+  obRpi;
   aboutPage = AboutPage;
    private Rooms:FirebaseObjectObservable<any>;
   //  private mail:FirebaseObjectObservable<any[]>;
@@ -26,6 +27,7 @@ export class HomePage {
   //     );    
       this.Rooms.subscribe(item => {
         // console.log(item);
+        this.obRpi=item
         this.rpi=Object.keys(item)
     console.log(Object.keys(item));
         // return item;
