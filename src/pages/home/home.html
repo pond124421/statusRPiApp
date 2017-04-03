@@ -18,7 +18,7 @@
 
     </ion-navbar>
 </ion-header>
-7/
+
 <ion-content padding>
     <!--<ion-searchbar [(ngModel)]="getItems($event)" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"> </ion-searchbar>-->
     <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
@@ -26,18 +26,28 @@
         <!--<button (click)="monitor(item)" *ngFor="let item of rpi">
             {{ item }}
          </button>-->
+        <ion-item-sliding #item>
+            <ion-item ion-item (click)="monitor(item)" *ngFor="let item of rpi">
+                <!--<button ion-item (click)="monitor(item)" *ngFor="let item of rpi"> -->
+                <ion-thumbnail item-left>
+                    <img src="assets/img/thumbnail-rpi.jpg" width="75%" height=auto>
+                </ion-thumbnail>
+                <h2 color='primary'>{{ item | uppercase}}</h2>
+                <!--</button>-->
+            </ion-item>
+            <ion-item-options side="left">
+                <button ion-button (click)="favorite(item)">Favorite</button>
+                <button ion-button color="danger" (click)="share(item)">
+                    <i class="fa fa-power-off" aria-hidden="true"></i>
+                </button>
+            </ion-item-options>
 
-        <button ion-item (click)="monitor(item)" *ngFor="let item of rpi"> 
-                  <ion-thumbnail item-left>
-        <img src="assets/img/thumbnail-rpi.jpg" width="75%" height=auto>
-      </ion-thumbnail>
-            <h2 color='primary'>{{ item | uppercase}}</h2>
-            <!--<p><{{ obRpi.basic.hostname }}</p>-->
-            
-        </button>
+            <ion-item-options side="right">
+                <button ion-button (click)="unread(item)">Unread</button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list><i class="fa fa-power-off" aria-hidden="true"></i>
 
-
-    </ion-list>
     <ion-infinite-scroll>
         <ion-infinite-scroll-content>
         </ion-infinite-scroll-content>

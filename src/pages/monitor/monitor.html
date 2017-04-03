@@ -43,47 +43,48 @@
       <h2>Ruby</h2>
     </ion-item>
   </ion-list>-->
-        <div class="col" align="middle" color="primary">
+        <!--<div class="col" align="middle" color="primary">
             <ion-icon name="home"></ion-icon>
             hostname :{{status.basic.hostname}}
-        </div>
+        </div>-->
 
     </div>
 
 
-    <!--<div class="item item-icon-left" ng-click="">
+    <div class="item item-icon-left" ng-click="">
         <div class="row">
             <div class="col" align="middle">
-                <i class="icon ion-home"></i>
-                <font face="verdana" color="green">hostname : {{data.basic.hostname}}</font>
+                <i class="fa fa-home"></i>
+                <font face="verdana" color="green">hostname : {{status.basic.hostname}}</font>
             </div>
             <div class="col">
-                <font size="4" color="blue">uptime : {{data.basic.date}}</font>
+                <font size="3" color="blue">uptime : {{status.basic.date}}</font>
             </div>
         </div>
     </div>
     <div class="item item-icon-left" ng-click="btncluster('basic.voltage')">
         <div class="pic" style="position:relative">
             <div class="ip" align="middle">
-                <i class="ion-earth" style="font-size: 50px !important;"></i><br> 192.168.12.2
+                <i class="fa fa-globe" style="font-size: 20px !important;"></i><br> 192.168.12.2
             </div>
             <img src="img/line.png" height="10px" width="200px" style="">
-            <i class="ion-wifi" style="font-size: 50px !important;"></i>
+            <i class="fa fa-wif" style="font-size: 50px !important;"></i>
             <img src="img/line.png" height="10px" width="200px" style="">
             <div class="pic" style="position:relative">
-
-                <i class="ion-iphone" style="font-size: 50px !important;"></i>
+                <i class="fa fa-mobile" style="font-size: 50px !important;"></i>
             </div>
         </div>
         <div class="row">
             <div class="col">Data</div>
-            <div class="col"><i class="ion-ios-cloud-download"></i>{{data.network.eth0.rx_packet}}</div>
-            <div class="col"><i class="ion-ios-cloud-upload"></i>{{data.network.eth0.tx_packet}}</div>
+            <div class="col"><i class="fa fa-download" aria-hidden="true"></i> {{status.network.eth0.rx_packet}}
+            </div>
+            <div class="col"><i class="fa fa-upload" aria-hidden="true"></i> {{status.network.eth0.tx_packet}}
+            </div>
         </div>
         <div class="row">
             <div class="col">Speed</div>
-            <div class="col"><i class="ion-ios-cloud-download"></i>{{data.network.eth0.rx_packet}} KB/s</div>
-            <div class="col"><i class="ion-ios-cloud-upload"></i>{{data.network.eth0.tx_packet}} KB/s</div>
+            <div class="col"><i class="fa fa-download" aria-hidden="true"></i> {{status.network.eth0.rx_packet}} KB/s</div>
+            <div class="col"><i class="fa fa-upload" aria-hidden="true"></i> {{status.network.eth0.tx_packet}} KB/s</div>
         </div>
     </div>
     <div>
@@ -98,6 +99,6 @@
                 Avail
             </div>
         </div>
-    </div>-->
+    </div>
 
 </ion-content>

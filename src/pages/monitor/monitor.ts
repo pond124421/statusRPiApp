@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-import { AngularFire, AuthMethods, AuthProviders ,FirebaseListObservable,FirebaseObjectObservable} from 'angularfire2';
+import { AngularFire ,FirebaseListObservable,FirebaseObjectObservable} from 'angularfire2';
 /*
   Generated class for the Monitor page.
 
