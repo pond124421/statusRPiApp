@@ -1,23 +1,29 @@
-import { Component } from '@angular/core';
-import { Nav,Platform } from 'ionic-angular';
+import { Component ,ViewChild} from '@angular/core';
+import { Nav,Platform ,MenuController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/tabs/tabs';
+import { MonitorPage } from '../pages/monitor/monitor';
 
  
 import { AngularFire } from 'angularfire2';
 import { LoginPage } from '../pages/login/login';
+import {Network} from '@ionic-native/network'
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-   nav: Nav;//+++
+  @ViewChild(Nav) nav: Nav;
   rootPage : any= TabsPage;
-pages: Array<{title: string, component: any}>;//+++
+pages: Array<{title: string, component: any}>;
 
  
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private af: AngularFire) {
+constructor(platform: Platform, private network: Network,
+  private menu:MenuController,  
+    statusBar: StatusBar, splashScreen: SplashScreen,
+    private af: AngularFire) {
+  
     this.af.auth.subscribe(auth => {
       if(!auth)
         this.rootPage = LoginPage;
@@ -31,14 +37,16 @@ pages: Array<{title: string, component: any}>;//+++
       splashScreen.hide();
     });
           this.pages = [//+++
-      { title: 'Login', component: LoginPage }
+            {title: 'Login', component: LoginPage},
+            {title: 'Moniter', component :MonitorPage}
 
     ];
   }
       openPage(page) {//+++
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+        this.nav.setRoot(page.component);
+        this.menu.toggle();    
   }
 }
 

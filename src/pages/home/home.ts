@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 
-import { NavController,NavParams } from 'ionic-angular';
+import { NavController,NavParams,ToastController } from 'ionic-angular';
 
 import { AboutPage } from '../about/about';
 import { MonitorPage } from '../monitor/monitor'
 import { AngularFire, AuthMethods, AuthProviders ,FirebaseListObservable,FirebaseObjectObservable} from 'angularfire2';
 import {Observable} from 'rxjs/Observable';
+import { Network } from '@ionic-native/network';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -14,10 +15,12 @@ export class HomePage {
   rpi;
   obRpi;
   aboutPage = AboutPage;
+  items: string[];
+
    private Rooms:FirebaseObjectObservable<any>;
   //  private mail:FirebaseObjectObservable<any[]>;
   private uid:String="CSMbf7EjRFZRCIxzssTDUT4UnR83";
-  constructor(public navCtrl: NavController,private af:AngularFire,public navParams:NavParams) {
+  constructor(public navCtrl: NavController,private toast : ToastController,private network : Network,private af:AngularFire,public navParams:NavParams) {
 
 // this.uid= this.navParams.get('uid');
     this.Rooms = af.database.object('users/'+this.uid+'/status');
@@ -29,9 +32,11 @@ export class HomePage {
         // console.log(item);
         this.obRpi=item
         this.rpi=Object.keys(item)
-    console.log(Object.keys(item));
         // return item;
-      });  
+    });  
+    // this.items.push(this.rpi)
+          // console.log(`rpi : ${this.rpi}`);
+      // console.log(`Items : ${this.items}`)
 // console.log("uid home: "+this.uid)
 // console.log("dd"+JSON.stringify(this.Rooms));
 console.log("Before log obj key")    
@@ -45,6 +50,27 @@ console.log("Before log obj key")
 // this.mail.push({name:'new item'}).then((room) => { console.log(room.key); });;
 // af.database.object().put()
   }
+  displayNetwork(connectStatus:string) {
+       this.toast.create({
+
+      message: `Hello : ${connectStatus}`,
+      duration: 3000
+    }).present();
+  }
+
+  ionViewDidEnter() {
+    console.log('ionView didEnter========'+this.network)
+
+    this.network.onConnect().subscribe(data => {
+      console.log("onconnect : "+data);
+      // this.displayNetwork('ddd');
+    }, error => console.error(error));
+  
+
+
+    this.network.onDisconnect().subscribe(data => console.log(`check network : ${data}`),error => console.error(error));
+}
+  // }
 
 
   logout() { 
@@ -55,16 +81,22 @@ console.log("Before log obj key")
   console.log("home clicked : "+mac)
     this.navCtrl.push(MonitorPage, { path:'users/'+this.uid+'/status/'+mac});
 }
- getItems() {
+ getItems(ev:any) {
+  //  this.items.push(this.rpi);
     // Reset rpi back to all of the items
     // this.initializeItems();
 
     // set val to the value of the ev target
-    // var val = ev.target.value;
+    var val = ev.target.value;
 
-    // if the value is an empty string don't filter the rpi
+          if (val && val.trim() != '') {
+      this.rpi = this.rpi.filter((item) => {
+        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+
     // if (val && val.trim() != '') {
-    //   this.rpi = this.rpi.filter((item) => {
+    //   this.items = this.items.filter((item) => {
     //     return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
     //   })
     // }

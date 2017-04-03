@@ -6,7 +6,10 @@
 -->
 <ion-header>
 
-    <ion-navbar>
+    <ion-navbar color="secondary">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
         <ion-title>monitor</ion-title>
     </ion-navbar>
 
@@ -14,13 +17,40 @@
 
 
 <ion-content padding>
+    <div padding>
+        <ion-segment [(ngModel)]="totalstatus">
+            <ion-segment-button value="all">
+                All
+            </ion-segment-button>
+            <ion-segment-button value="puppies">
+                Basic
+            </ion-segment-button>
+            <ion-segment-button value="a">
+                RAM
+            </ion-segment-button>
+            <ion-segment-button value="puppies">
+                CPU
+            </ion-segment-button>
 
-    <div class="col" align="middle">
-        <!--<i class="icon ion-home"></i>-->
-        <ion-icon name="home"></ion-icon>
-        hostname :{{status.basic.hostname}}
-        <!--<font color="green">hostname : {{data.basic.hostname}}</font>-->
+        </ion-segment>
     </div>
+    <div [ngSwitch]="totalstatus">
+        <!--<ion-list *ngSwitchCase="'puppies'">
+    <ion-item>
+      <ion-thumbnail item-left>
+        <img src="img/thumbnail-puppy-1.jpg">
+      </ion-thumbnail>
+      <h2>Ruby</h2>
+    </ion-item>
+  </ion-list>-->
+        <div class="col" align="middle" color="primary">
+            <ion-icon name="home"></ion-icon>
+            hostname :{{status.basic.hostname}}
+        </div>
+
+    </div>
+
+
     <!--<div class="item item-icon-left" ng-click="">
         <div class="row">
             <div class="col" align="middle">

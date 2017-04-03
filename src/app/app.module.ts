@@ -12,6 +12,7 @@ import { MonitorPage } from '../pages/monitor/monitor'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireModule } from 'angularfire2';
+import { Network } from '@ionic-native/network';
   export const config = {
     apiKey: "AIzaSyCMuM1Toy1upqRY1czF0YpkhxrAo2fzR4Q",
     authDomain: "pi-grit.firebaseapp.com",
@@ -47,7 +48,9 @@ import { AngularFireModule } from 'angularfire2';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    Network
+
   ]
 })
 export class AppModule {}

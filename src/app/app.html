@@ -1,16 +1,15 @@
-<ion-menu side="right" [content]="content">
+<ion-menu [content]="content">
 
     <!-- The side menu title -->
-    <ion-toolbar>
-        <ion-title>Menu</ion-title>
-    </ion-toolbar>
-
+    <ion-header>
+        <ion-toolbar color="primary">
+            <ion-title>
+                <ion-icon name="menu"></ion-icon> Menu</ion-title>
+        </ion-toolbar>
+    </ion-header>
     <ion-content>
         <ion-list>
-            <!-- remember the `this.pages` object we created in `app.js`?
-      // Iterate through, then when clicked, run the associated function
-      // passing in the #p item. -->
-            // changed #p to let p instead
+
             <button ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>
@@ -18,4 +17,4 @@
     </ion-content>
 </ion-menu>
 <!--=============================================================-->
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-nav #content [root]="rootPage"></ion-nav>

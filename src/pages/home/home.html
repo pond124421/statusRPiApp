@@ -1,33 +1,46 @@
 <ion-header>
     <ion-navbar>
-        <ion-buttons start>
-
-        </ion-buttons>
+        <ion-segment>
+            <ion-segment-button value="new">
+                All
+            </ion-segment-button>
+            <ion-segment-button value="hot">
+                Bookmarks
+            </ion-segment-button>
+        </ion-segment>
         <ion-buttons start>
             <button ion-button icon-only (click)="logout()">
                  <ion-icon name="contact"></ion-icon>
             </button>
         </ion-buttons>
 
-        <ion-title>Home</ion-title>
+        <!--<ion-title>Home</ion-title>-->
 
-        <ion-searchbar [(ngModel)]="getItems" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"> </ion-searchbar>
     </ion-navbar>
 </ion-header>
-
+7/
 <ion-content padding>
+    <!--<ion-searchbar [(ngModel)]="getItems($event)" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"> </ion-searchbar>-->
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
     <ion-list>
         <!--<button (click)="monitor(item)" *ngFor="let item of rpi">
             {{ item }}
          </button>-->
 
-        <ion-item (click)="monitor(item)" *ngFor="let item of rpi"> <button>
-            <h2>{{ item }}</h2>
+        <button ion-item (click)="monitor(item)" *ngFor="let item of rpi"> 
+                  <ion-thumbnail item-left>
+        <img src="assets/img/thumbnail-rpi.jpg" width="75%" height=auto>
+      </ion-thumbnail>
+            <h2 color='primary'>{{ item | uppercase}}</h2>
             <!--<p><{{ obRpi.basic.hostname }}</p>-->
-            </button>
-        </ion-item>
+            
+        </button>
 
 
     </ion-list>
-    <button [navPush]="aboutPage">Go To About</button>
+    <ion-infinite-scroll>
+        <ion-infinite-scroll-content>
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <button ion-button [navPush]="aboutPage">Go To About</button>
 </ion-content>
