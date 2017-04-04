@@ -26,8 +26,8 @@
         <!--<button (click)="monitor(item)" *ngFor="let item of rpi">
             {{ item }}
          </button>-->
-        <ion-item-sliding #item>
-            <ion-item ion-item (click)="monitor(item)" *ngFor="let item of rpi">
+        <ion-item-sliding (click)="monitor(item)" *ngFor="let item of rpi">
+            <ion-item>
                 <!--<button ion-item (click)="monitor(item)" *ngFor="let item of rpi"> -->
                 <ion-thumbnail item-left>
                     <img src="assets/img/thumbnail-rpi.jpg" width="75%" height=auto>
@@ -36,17 +36,20 @@
                 <!--</button>-->
             </ion-item>
             <ion-item-options side="left">
-                <button ion-button (click)="favorite(item)">Favorite</button>
-                <button ion-button color="danger" (click)="share(item)">
-                    <i class="fa fa-power-off" aria-hidden="true"></i>
+                <button ion-button color="secondary" (click)="prompt(item)">
+                    <i class="fa fa-terminal" aria-hidden="true"></i>prompt
+                </button>
+                <button ion-button color="danger" (click)="shutdown(item)">
+                    <!--<i class="fa fa-power-off" aria-hidden="true"></i>-->
+                    <ion-icon name="power"></ion-icon>shutdown
                 </button>
             </ion-item-options>
 
             <ion-item-options side="right">
-                <button ion-button (click)="unread(item)">Unread</button>
+                <button ion-button (click)="favorite(item)"><ion-icon name="bookmark"></ion-icon>bookmark</button>
             </ion-item-options>
         </ion-item-sliding>
-    </ion-list><i class="fa fa-power-off" aria-hidden="true"></i>
+    </ion-list>
 
     <ion-infinite-scroll>
         <ion-infinite-scroll-content>

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
-import { NavController,NavParams,ToastController } from 'ionic-angular';
+import { NavController,NavParams,ToastController,AlertController } from 'ionic-angular';
 
 import { AboutPage } from '../about/about';
 import { MonitorPage } from '../monitor/monitor'
 import { AngularFire, AuthMethods, AuthProviders ,FirebaseListObservable,FirebaseObjectObservable} from 'angularfire2';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import { Network } from '@ionic-native/network';
 @Component({
   selector: 'page-home',
@@ -20,7 +20,7 @@ export class HomePage {
    private Rooms:FirebaseObjectObservable<any>;
   //  private mail:FirebaseObjectObservable<any[]>;
   private uid:String="CSMbf7EjRFZRCIxzssTDUT4UnR83";
-  constructor(public navCtrl: NavController,private toast : ToastController,private network : Network,private af:AngularFire,public navParams:NavParams) {
+  constructor(public navCtrl: NavController,private alertCtrl: AlertController,private toast : ToastController,private network : Network,private af:AngularFire,public navParams:NavParams) {
 
 // this.uid= this.navParams.get('uid');
     this.Rooms = af.database.object('users/'+this.uid+'/status');
@@ -34,6 +34,7 @@ export class HomePage {
         this.rpi=Object.keys(item)
         // return item;
     });  
+   
     // this.items.push(this.rpi)
           // console.log(`rpi : ${this.rpi}`);
       // console.log(`Items : ${this.items}`)
@@ -71,8 +72,64 @@ console.log("Before log obj key")
     this.network.onDisconnect().subscribe(data => console.log(`check network : ${data}`),error => console.error(error));
 }
   // }
+shutdown(thisRpi) {
+  let alert = this.alertCtrl.create({
+    title: 'Confirm purchase',
+    message: `Do you want to shutdown ${thisRpi} ?`,
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Confirm',
+        handler: data => {
+          this.af.database.object('users/' + this.uid + '/status/' + thisRpi).update({'shutdown':1});
+          console.log('shutdowned');
+        }
+      }
+    ]
+  });
+  alert.present();
+}
+  prompt(thisRpi)  {
+  let alert = this.alertCtrl.create({
+    title: 'Prompt',
+    inputs: [
+      {
+        name: 'command',
+        placeholder: 'Command'
+      },
 
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: data => {
+          console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Run',
+        handler: data => {
+          this.af.database.object('users/' + this.uid + '/status/' + thisRpi).update(data);
 
+          // if (User.isValid(data.username, data.password)) {
+          //   // logged in!
+          // } else {
+          //   // invalid login
+          //   return false;
+          // }
+        }
+      }
+    ]
+  });
+  alert.present();
+}
   logout() { 
     this.af.auth.logout(); 
     console.log("Log out");
