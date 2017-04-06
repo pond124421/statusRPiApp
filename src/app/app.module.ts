@@ -6,6 +6,8 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
+
+import { OfflinePage } from '../pages/offline/offline';
 import { SignupPage } from '../pages/signup/signup';
 import { MonitorPage } from '../pages/monitor/monitor'
 
@@ -28,6 +30,7 @@ import { Network } from '@ionic-native/network';
     HomePage,
     TabsPage,
     LoginPage,
+    OfflinePage,
     SignupPage,
     MonitorPage
   ],
@@ -43,6 +46,7 @@ import { Network } from '@ionic-native/network';
     HomePage,
     TabsPage,
     LoginPage,
+    OfflinePage,
     SignupPage,MonitorPage
   ],
   providers: [

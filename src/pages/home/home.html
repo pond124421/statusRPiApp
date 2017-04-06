@@ -29,9 +29,12 @@
         <ion-item-sliding (click)="monitor(item)" *ngFor="let item of rpi">
             <ion-item>
                 <!--<button ion-item (click)="monitor(item)" *ngFor="let item of rpi"> -->
-                <ion-thumbnail item-left>
+                <!--<ion-thumbnail item-left>
                     <img src="assets/img/thumbnail-rpi.jpg" width="75%" height=auto>
-                </ion-thumbnail>
+                </ion-thumbnail>-->
+                <ion-avatar item-left>
+                    <img src="assets/img/thumbnail-rpi.jpg">
+                </ion-avatar>
                 <h2 color='primary'>{{ item | uppercase}}</h2>
                 <!--</button>-->
             </ion-item>

@@ -39,6 +39,7 @@ constructor(platform: Platform, private network: Network,
           this.pages = [//+++
             {title: 'Login', component: LoginPage},
             {title: 'Moniter', component :MonitorPage}
+            // {title: 'Logout'},
 
     ];
   }

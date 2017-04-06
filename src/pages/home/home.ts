@@ -60,7 +60,7 @@ console.log("Before log obj key")
   }
 
   ionViewDidEnter() {
-    console.log('ionView didEnter========'+this.network)
+    console.log('ionView didEnter========'+this.network.downlinkMax)
 
     this.network.onConnect().subscribe(data => {
       console.log("onconnect : "+data);

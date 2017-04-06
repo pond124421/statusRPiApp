@@ -4,6 +4,7 @@ import { SignupPage } from '../signup/signup';
 import { AngularFire, AuthMethods, AuthProviders } from 'angularfire2';
 
 import { HomePage } from '../home/home';
+import { OfflinePage } from '../offline/offline';
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -38,7 +39,10 @@ export class LoginPage {
       toast.present();
     });
   }
-
+  offline() {
+    console.log("offline clicked");
+    this.navCtrl.push(OfflinePage);
+}
   signup() {
     this.navCtrl.push(SignupPage, { email: this.loginData.email });
   }
