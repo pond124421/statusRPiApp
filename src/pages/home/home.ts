@@ -13,15 +13,17 @@ import { Network } from '@ionic-native/network';
 })
 export class HomePage {
   rpi;
+  rpiBookmark;
   obRpi;
   aboutPage = AboutPage;
   items: string[];
-
+pi:any
    private Rooms:FirebaseObjectObservable<any>;
   //  private mail:FirebaseObjectObservable<any[]>;
   private uid:String="CSMbf7EjRFZRCIxzssTDUT4UnR83";
   constructor(public navCtrl: NavController,private alertCtrl: AlertController,private toast : ToastController,private network : Network,private af:AngularFire,public navParams:NavParams) {
-
+    this.pi = "all";
+    this.rpiBookmark = [];
 // this.uid= this.navParams.get('uid');
     this.Rooms = af.database.object('users/'+this.uid+'/status');
   //  this.Rooms.subscribe(
@@ -50,6 +52,7 @@ console.log("Before log obj key")
 // this.mail.push({});
 // this.mail.push({name:'new item'}).then((room) => { console.log(room.key); });;
 // af.database.object().put()
+ console.log("bookmark : " + this.rpiBookmark);    
   }
   displayNetwork(connectStatus:string) {
        this.toast.create({
@@ -129,7 +132,14 @@ shutdown(thisRpi) {
     ]
   });
   alert.present();
-}
+  }
+  bookmark(rpi) {
+    this.rpiBookmark.push(rpi);
+    console.log("add bookmark : " + this.rpiBookmark);
+  }  
+  delBookmark(rpi) {
+  this.rpiBookmark.pop(rpi)
+}  
   logout() { 
     this.af.auth.logout(); 
     console.log("Log out");

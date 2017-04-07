@@ -49,6 +49,10 @@ constructor(platform: Platform, private network: Network,
         this.nav.setRoot(page.component);
         this.menu.toggle();    
   }
+    logout() { 
+    this.af.auth.logout(); 
+    console.log("Log out");
+  }
 }
 
 

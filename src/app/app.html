@@ -13,6 +13,9 @@
             <button ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>
+            <button ion-item (click)="logout()">
+        <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+      </button>
         </ion-list>
     </ion-content>
 </ion-menu>

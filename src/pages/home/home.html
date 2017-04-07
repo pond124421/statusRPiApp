@@ -1,10 +1,10 @@
 <ion-header>
     <ion-navbar>
-        <ion-segment>
-            <ion-segment-button value="new">
+        <ion-segment [(ngModel)]="pi">
+            <ion-segment-button value="all">
                 All
             </ion-segment-button>
-            <ion-segment-button value="hot">
+            <ion-segment-button value="bookmark">
                 Bookmarks
             </ion-segment-button>
         </ion-segment>
@@ -21,39 +21,79 @@
 
 <ion-content padding>
     <!--<ion-searchbar [(ngModel)]="getItems($event)" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"> </ion-searchbar>-->
-    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-    <ion-list>
-        <!--<button (click)="monitor(item)" *ngFor="let item of rpi">
+
+    <div [ngSwitch]="pi">
+
+        <ion-list *ngSwitchCase="'all'">
+            <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+            <!--<button (click)="monitor(item)" *ngFor="let item of rpi">
             {{ item }}
          </button>-->
-        <ion-item-sliding (click)="monitor(item)" *ngFor="let item of rpi">
-            <ion-item>
-                <!--<button ion-item (click)="monitor(item)" *ngFor="let item of rpi"> -->
-                <!--<ion-thumbnail item-left>
+            <ion-item-sliding (click)="monitor(item)" *ngFor="let item of rpi">
+                <ion-item>
+                    <!--<button ion-item (click)="monitor(item)" *ngFor="let item of rpi"> -->
+                    <!--<ion-thumbnail item-left>
                     <img src="assets/img/thumbnail-rpi.jpg" width="75%" height=auto>
                 </ion-thumbnail>-->
-                <ion-avatar item-left>
-                    <img src="assets/img/thumbnail-rpi.jpg">
-                </ion-avatar>
-                <h2 color='primary'>{{ item | uppercase}}</h2>
-                <!--</button>-->
-            </ion-item>
-            <ion-item-options side="left">
-                <button ion-button color="secondary" (click)="prompt(item)">
+                    <ion-avatar item-left>
+
+                        <img src="assets/img/thumbnail-rpi.jpg">
+                    </ion-avatar>
+                    <h2 color='primary'>{{ item | uppercase}}</h2>
+
+                    <!--</button>-->
+                </ion-item>
+
+                <ion-item-options side="left">
+                    <button ion-button color="secondary" (click)="prompt(item)">
                     <i class="fa fa-terminal" aria-hidden="true"></i>prompt
                 </button>
-                <button ion-button color="danger" (click)="shutdown(item)">
+                    <button ion-button color="danger" (click)="shutdown(item)">
                     <!--<i class="fa fa-power-off" aria-hidden="true"></i>-->
                     <ion-icon name="power"></ion-icon>shutdown
                 </button>
-            </ion-item-options>
+                </ion-item-options>
 
-            <ion-item-options side="right">
-                <button ion-button (click)="favorite(item)"><ion-icon name="bookmark"></ion-icon>bookmark</button>
-            </ion-item-options>
-        </ion-item-sliding>
-    </ion-list>
+                <ion-item-options side="right">
+                    <button ion-button (click)="bookmark(item)"><ion-icon name="bookmark"></ion-icon>bookmark</button>
 
+                </ion-item-options>
+            </ion-item-sliding>
+        </ion-list>
+        <ion-list *ngSwitchCase="'bookmark'">
+            <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+            <ion-item-sliding (click)="monitor(item)" *ngFor="let item of rpiBookmark">
+                <ion-item>
+                    <!--<button ion-item (click)="monitor(item)" *ngFor="let item of rpi"> -->
+                    <!--<ion-thumbnail item-left>
+                    <img src="assets/img/thumbnail-rpi.jpg" width="75%" height=auto>
+                </ion-thumbnail>-->
+                    <ion-avatar item-left>
+
+                        <img src="assets/img/thumbnail-rpi.jpg">
+                    </ion-avatar>
+                    <h2 color='primary'>{{ item | uppercase}}</h2>
+
+                    <!--</button>-->
+                </ion-item>
+
+                <ion-item-options side="left">
+                    <button ion-button color="secondary" (click)="prompt(item)">
+                    <i class="fa fa-terminal" aria-hidden="true"></i>prompt
+                </button>
+                    <button ion-button color="danger" (click)="shutdown(item)">
+                    <!--<i class="fa fa-power-off" aria-hidden="true"></i>-->
+                    <ion-icon name="power"></ion-icon>shutdown
+                </button>
+                </ion-item-options>
+
+                <ion-item-options side="right">
+                    <button ion-button (click)="delBookmark(item)"><ion-icon name="bookmark"></ion-icon>Delete</button>
+
+                </ion-item-options>
+            </ion-item-sliding>
+        </ion-list>
+    </div>
     <ion-infinite-scroll>
         <ion-infinite-scroll-content>
         </ion-infinite-scroll-content>
