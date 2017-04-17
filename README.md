@@ -19,7 +19,7 @@ npm install
 Then run:
 
 ```bash
-$ ionic start statusRPiApp
+$ ionic serve
 
 ```
 
